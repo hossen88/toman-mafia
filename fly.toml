@@ -16,6 +16,12 @@ primary_region = 'lhr'
   min_machines_running = 0
   processes = ['app']
 
+  [http_service.health_check]
+    path = '/healthz'
+    interval = '30s'
+    timeout = '5s'
+    grace_period = '15s'
+
 [[vm]]
   memory = '1gb'
   cpu_kind = 'shared'

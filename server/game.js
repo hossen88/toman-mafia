@@ -280,19 +280,14 @@ class Game {
     const d = this.lastDawn;
     if (!d) return;
     if (d.death) {
-      const role = rules.ROLES[d.death.role];
       const victim = this.byId(d.death.id);
       this.hooks.broadcast({
         type: 'death',
         cause: 'kill',
         playerId: d.death.id,
         name: d.death.name,
-        role: d.death.role,
-        roleName: role.name,
-        roleEn: role.en,
-        suit: role.suit,
-        gender: victim ? victim.gender || 'male' : 'male',
-        text: `لم يعشَ ${d.death.name}. دوره كان: ${role.name}.`,
+        avatar: victim ? victim.avatar || null : null,
+        text: `${d.death.name} لم يعشَ الليلة.`,
       });
     } else if (d.saved) {
       this.hooks.broadcast({
@@ -406,17 +401,13 @@ class Game {
           role: victim.role,
         };
         this.lastDeath = verdict.lynched;
-        const role = rules.ROLES[victim.role];
         this.hooks.broadcast({
           type: 'death',
           cause: 'lynch',
           playerId: victim.id,
           name: victim.name,
-          role: victim.role,
-          roleName: role.name,
-          roleEn: role.en,
-          suit: role.suit,
-          text: `أعدَمَت المدينة ${victim.name}. دوره كان: ${role.name}.`,
+          avatar: victim.avatar || null,
+          text: `أعدَمَت المدينة ${victim.name}.`,
         });
       }
     } else {

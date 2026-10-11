@@ -28,6 +28,7 @@
     lastPhaseSeq: -1,
     timerHandle: null,
     curtainTimer: null,
+    deathCardTimer: null,
     onAction: null,
     onChat: null,
   };
@@ -39,6 +40,7 @@
   function init() {
     $('players-grid').addEventListener('click', onGridClick);
     $('action-confirm').addEventListener('click', confirmAction);
+    $('death-card-close').addEventListener('click', dismissDeathCard);
     $('chat-form').addEventListener('submit', (ev) => {
       ev.preventDefault();
       const input = $('chat-input');
@@ -125,11 +127,10 @@
     if (state.lastDeath && (state.phase === 'day' || state.phase === 'voting')) {
       banner.hidden = false;
       banner.className = 'death-banner';
-      const role = ROLE_BY_ID[state.lastDeath.role];
       const victim = state.players && state.players.find((p) => p.id === state.lastDeath.id);
-      text.textContent = `${state.lastDeath.name} مات. دوره كان: ${role ? role.name : state.lastDeath.role}.`;
-      if (role) {
-        img.src = window.TM.roleImg(role.id, victim ? victim.gender : 'male');
+      text.textContent = `${state.lastDeath.name} خارج اللعبة.`;
+      if (victim && victim.avatar) {
+        img.src = victim.avatar;
         img.hidden = false;
         img.style.display = '';
       } else {
@@ -473,19 +474,60 @@
     if (!GameUI.state) return;
     GameUI.state._dawn = msg;
     if (GameUI.state.phase === 'night' || GameUI.state.phase === 'over') return;
+
+    if ((msg.cause === 'kill' || msg.cause === 'lynch') && msg.name) {
+      showDeathCard(msg);
+      banner.hidden = true;
+      addSys(msg.text || '');
+      return;
+    }
+
     banner.hidden = false;
     banner.className =
-      'death-banner' + (msg.cause === 'saved' ? ' safe' : msg.cause === 'none' || msg.cause === 'tie' ? ' calm' : '');
+      'death-banner' + (msg.cause === 'saved' ? ' safe' : ' calm' ? ' calm' : '');
+    banner.className = 'death-banner' + (msg.cause === 'saved' ? ' safe' : ' calm');
     text.textContent = msg.text || '';
-    if (msg.cause === 'kill' && msg.role) {
-      img.src = window.TM.roleImg(msg.role, msg.gender);
-      img.hidden = false;
-      img.style.display = '';
-    } else {
-      img.hidden = true;
-      img.style.display = 'none';
-    }
+    img.hidden = true;
+    img.style.display = 'none';
     addSys(msg.text || '');
+  }
+
+  function showDeathCard(msg) {
+    const overlay = $('death-overlay');
+    const cardImg = $('death-card-img');
+    const cardInitials = $('death-card-initials');
+    const cardName = $('death-card-name');
+    const cardSub = $('death-card-sub');
+
+    cardName.textContent = msg.name;
+    cardSub.textContent = 'سقط في الظلام...';
+
+    const victim = GameUI.state && GameUI.state.players && GameUI.state.players.find((p) => p.id === msg.playerId);
+    if (victim && victim.avatar) {
+      cardImg.src = victim.avatar;
+      cardImg.hidden = false;
+      cardInitials.hidden = true;
+    } else {
+      cardImg.hidden = true;
+      cardInitials.hidden = false;
+      cardInitials.textContent = window.TM.initials(msg.name || '');
+    }
+
+    overlay.hidden = false;
+    const card = $('death-card');
+    card.style.animation = 'none';
+    void card.offsetWidth;
+    card.style.animation = '';
+
+    clearTimeout(GameUI.deathCardTimer);
+    GameUI.deathCardTimer = setTimeout(() => {
+      overlay.hidden = true;
+    }, 5000);
+  }
+
+  function dismissDeathCard() {
+    $('death-overlay').hidden = true;
+    clearTimeout(GameUI.deathCardTimer);
   }
 
   function reset() {
