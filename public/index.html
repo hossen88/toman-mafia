@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#11110f">
+<meta name="description" content="TOMAN MAFIA — العب المافيا مع اصدقائك عبر الإنترنت. غرفة خاصة، أدوار كلاسيكية، وليلة لا ترحم.">
+<title>TOMAN MAFIA — لا تثق بأحد</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2311110f'/%3E%3Cpath d='M32 8 54 20v24L32 56 10 44V20z' fill='none' stroke='%23A51538' stroke-width='3'/%3E%3Ctext x='32' y='40' font-family='Arial Black,Arial' font-size='20' font-weight='900' font-style='italic' fill='%23eeeae2' text-anchor='middle'%3ETM%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/screens.css">
+</head>
+<body class="intro-active">
+
+<a class="skip-link" href="#main">تجاوز إلى المحتوى</a>
+
+<!-- ═══════════ INTRO ═══════════ -->
+<section class="intro" id="intro" aria-label="مقدمة TOMAN MAFIA" tabindex="-1">
+  <div class="intro-atmosphere" aria-hidden="true"></div>
+  <div class="intro-grain" aria-hidden="true"></div>
+  <span class="intro-edition" aria-hidden="true">TOMAN MAFIA / ONLINE EDITION</span>
+
+  <div class="intro-loader" id="intro-loader">
+    <div class="intro-logo-wrap">
+      <svg class="intro-logo-outline" viewBox="0 0 120 120" aria-hidden="true">
+        <path d="M60 8 L106 30 V70 L60 112 L14 70 V30 Z" pathLength="1" style="--stroke-delay:0ms"></path>
+        <path d="M34 44 H86 M60 34 V86" pathLength="1" style="--stroke-delay:260ms"></path>
+      </svg>
+      <svg class="intro-logo" viewBox="0 0 120 120" role="img" aria-label="TOMAN MAFIA">
+        <path d="M60 8 L106 30 V70 L60 112 L14 70 V30 Z" fill="#16160f" stroke="#A51538" stroke-width="3"></path>
+        <path d="M60 16 L98 34 V66 L60 104 L22 66 V34 Z" fill="none" stroke="rgba(165,21,56,.45)" stroke-width="1"></path>
+        <text x="60" y="72" text-anchor="middle" font-family="Chakra Petch, Arial Black, Arial" font-size="38" font-weight="700" font-style="italic" fill="#eeeae2">TM</text>
+      </svg>
+      <span class="intro-logo-glow" aria-hidden="true"></span>
+    </div>
+
+    <div class="intro-loading-ui">
+      <div class="intro-loading-caption">
+        <span>PREPARING YOUR ARRIVAL</span>
+        <span class="intro-load-status">SHUFFLING THE DECK</span>
+      </div>
+      <div class="intro-loading-line" role="progressbar" aria-label="تحميل" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="intro-bar">
+        <span></span><i aria-hidden="true"></i>
+      </div>
+      <span class="intro-track-label">الليلة تبدأ بعد لحظات.</span>
+    </div>
+
+    <div class="intro-counter" aria-hidden="true"><span class="intro-percent" id="intro-percent">000</span><small>%</small></div>
+  </div>
+
+  <div class="intro-titles" aria-hidden="true">
+    <p class="intro-title" data-cue="0"><span>Welcome</span> To</p>
+    <p class="intro-title" data-cue="1">The <b>Mafia</b></p>
+    <p class="intro-title" data-cue="2"><span>Trust</span> No One.</p>
+    <p class="intro-title" data-cue="3">Toman <b>Mafia</b></p>
+  </div>
+
+  <div class="intro-footer">
+    <span dir="ltr">ONE ROOM. ENDLESS SUSPICION.</span>
+    <button class="intro-skip" type="button" id="intro-skip">تخطّي <span aria-hidden="true">↗</span></button>
+  </div>
+</section>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header class="site-header" id="site-header">
+  <a class="brand" href="#home" aria-label="TOMAN MAFIA — البداية">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="44" height="44">
+        <path d="M60 8 L106 30 V70 L60 112 L14 70 V30 Z" fill="#16160f" stroke="#A51538" stroke-width="4"></path>
+        <text x="60" y="74" text-anchor="middle" font-family="Chakra Petch, Arial Black, Arial" font-size="42" font-weight="700" font-style="italic" fill="#eeeae2">TM</text>
+      </svg>
+    </span>
+    <span class="brand-type">
+      <span class="brand-name">TOMAN MAFIA</span>
+      <small>ONLINE EDITION</small>
+    </span>
+  </a>
+
+  <nav class="studio-menu" aria-label="التنقل الرئيسي">
+    <a href="#home" class="nav-home"><span>البداية</span><small>01</small></a>
+    <a href="#roles"><span>الأدوار</span><small>02</small></a>
+    <a href="#rules"><span>القوانين</span><small>03</small></a>
+    <a href="#play" class="nav-play"><span>العب الآن</span><small>04</small></a>
+  </nav>
+
+  <div class="header-end">
+    <span class="conn-pill" id="conn-pill" data-state="off"><i aria-hidden="true"></i><span>غير متصل</span></span>
+  </div>
+</header>
+
+<!-- ═══════════ HOME ═══════════ -->
+<main id="main">
+  <section class="hero" id="home" aria-label="TOMAN MAFIA">
+    <div class="ambient" aria-hidden="true"></div>
+    <div class="light-plane" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="ghost-word" aria-hidden="true">MAFIA</div>
+    <div class="ambient-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="hero-noise" aria-hidden="true"></div>
+
+    <div class="scene-content">
+      <p class="scene-kicker">
+        <span class="tiny-cross" aria-hidden="true">✕</span>
+        <span class="kicker-rule" aria-hidden="true"></span>
+        THE ART OF DISTRUST
+      </p>
+      <h1 id="hero-title">
+        <span class="headline-line">TRUST</span>
+        <span class="headline-line">NO ONE.</span>
+        <span class="headline-line accent">REMEMBER</span>
+        <span class="headline-line accent">EVERYTHING.</span>
+      </h1>
+      <div class="hero-story">
+        <p class="scene-arabic">مدينة تنام كل ليلة، ويقتل فيها اسمٌ لا تعرفه.</p>
+        <p class="scene-description">اجمع اصدقائك في غرفة واحدة، ووزّع الأدوار، وابدأ التحقيق — من بيته.</p>
+      </div>
+      <div class="hero-actions">
+        <button class="primary-button" type="button" data-gate="create"><span>إنشاء غرفة</span><span class="button-mark" aria-hidden="true">+</span></button>
+        <button class="ghost-button" type="button" data-gate="join"><span>انضمام برمز</span><span class="button-mark" aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+
+    <div class="character-stage" id="character-stage" aria-hidden="true">
+      <div class="character-halo"></div>
+      <div class="stage-cards" id="stage-cards"></div>
+      <div class="character-vignette"></div>
+    </div>
+
+    <div class="identity" aria-hidden="true">
+      <span class="identity-overline">THE ART OF DISTRUST</span>
+      <span class="identity-name">TM</span>
+      <span class="identity-line"></span>
+    </div>
+    <div class="scene-number" aria-hidden="true">01</div>
+
+    <div class="hero-bottom">
+      <div class="chapter-control">
+        <div class="chapter-top" dir="ltr">
+          <span class="chapter-current">01</span>
+          <span class="chapter-divider">/</span>
+          <span class="chapter-total">04</span>
+        </div>
+        <div class="chapter-progress" aria-hidden="true"><span></span></div>
+        <span class="chapter-caption">SELECT YOUR ROLE</span>
+      </div>
+      <div class="character-selectors" role="group" aria-label="اختر دورًا للعرض" id="role-selectors"></div>
+    </div>
+  </section>
+
+  <div class="manifesto-strip" aria-hidden="true">
+    <span>SUSPICION</span><b>+</b>
+    <span class="strip-outline">DECEPTION</span><b>+</b>
+    <span>VERDICT</span><b>✦</b>
+    <span class="strip-outline">TOMAN MAFIA</span>
+  </div>
+
+  <!-- ROLES -->
+  <section class="roles-section" id="roles" aria-labelledby="roles-title">
+    <div class="section-shell">
+      <div class="section-index">
+        <span>TOMAN MAFIA / THE DECK</span>
+        <span>02 — الأدوار</span>
+      </div>
+      <div class="roles-heading">
+        <div>
+          <span class="arabic-eyebrow">ارتدِ دورك، واكتب حكايتك</span>
+          <h2 id="roles-title" dir="ltr">CHOOSE YOUR<br><em>ROLE.</em></h2>
+        </div>
+        <p>أربع بطاقات في كل جولة.<br>واحدة منها ستكون لك. اعرف ما ينتظر كل دور.</p>
+      </div>
+      <div class="story-hand" id="role-cards"></div>
+      <span class="story-footnote">تُوزَّع الأدوار عشوائيًا عند بدء اللعبة.</span>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section class="rules-section" id="rules" aria-labelledby="rules-title">
+    <div class="section-shell">
+      <div class="section-index">
+        <span>TOMAN MAFIA / THE CODE</span>
+        <span>03 — القوانين</span>
+      </div>
+      <div class="roles-heading">
+        <div>
+          <span class="arabic-eyebrow">أربع مراحل، وحكم لا يرحم</span>
+          <h2 id="rules-title" dir="ltr">HOW THE<br><em>NIGHT WORKS.</em></h2>
+        </div>
+        <p>كل جولة تدور على محور واحد:<br>أن تعرف من يكذب عليك قبل أن يراك.</p>
+      </div>
+      <div class="world-principles" id="rules-grid"></div>
+    </div>
+  </section>
+
+  <!-- ACCESS -->
+  <section class="city-access" id="play" aria-labelledby="play-title">
+    <div class="access-content">
+      <div class="access-heading">
+        <div class="access-topline">
+          <span class="access-index">TOMAN MAFIA</span>
+          <span class="access-partner-cross" aria-hidden="true">×</span>
+          <span class="access-platform">PRIVATE ROOMS</span>
+        </div>
+        <div class="access-invitation">
+          <span class="access-brand" aria-hidden="true">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <path d="M60 8 L106 30 V70 L60 112 L14 70 V30 Z" fill="#16160f" stroke="#A51538" stroke-width="3"></path>
+              <text x="60" y="74" text-anchor="middle" font-family="Chakra Petch, Arial Black, Arial" font-size="42" font-weight="700" font-style="italic" fill="#eeeae2">TM</text>
+            </svg>
+          </span>
+          <div>
+            <h2 class="access-title" id="play-title">المدينة تنتظرك.</h2>
+            <span class="access-caption" dir="ltr">MAKE YOUR ENTRANCE.</span>
+          </div>
+        </div>
+        <div class="access-bottomline"><span>YOUR NEXT ALIBI STARTS HERE</span><span aria-hidden="true">✦</span></div>
+      </div>
+      <div class="access-actions">
+        <span class="access-tear-line" aria-hidden="true"></span>
+        <div class="access-buttons">
+          <button class="access-connect" type="button" data-gate="create">
+            <span class="access-cta-top">CREATE ROOM <small>↗</small></span>
+            <span class="access-cta-label">أنشئ غرفة<span>ادعُ أصدقاءك بالرمز</span></span>
+          </button>
+          <button class="access-connect alt" type="button" data-gate="join">
+            <span class="access-cta-top">JOIN ROOM <small>↗</small></span>
+            <span class="access-cta-label">انضم برمز<span>أدخل رمز الغرفة</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═══════════ LOBBY ═══════════ -->
+<section class="screen lobby-screen" id="lobby" hidden aria-label="غرفة الانتظار">
+  <div class="screen-ambient" aria-hidden="true"></div>
+  <div class="screen-grid" aria-hidden="true"></div>
+
+  <div class="lobby-shell">
+    <header class="lobby-head">
+      <div class="lobby-title">
+        <span class="arabic-eyebrow">غرفة الانتظار</span>
+        <h2 dir="ltr">THE <em>ROOM.</em></h2>
+      </div>
+      <div class="room-code-block">
+        <span class="room-code-label">ROOM CODE</span>
+        <button class="room-code" type="button" id="room-code" title="انسخ الرمز">—————</button>
+        <button class="copy-btn" type="button" id="copy-code">نسخ الرمز</button>
+        <button class="copy-btn ghost" type="button" id="copy-link">نسخ الرابط</button>
+      </div>
+      <button class="leave-btn" type="button" id="lobby-leave">مغادرة <span aria-hidden="true">↗</span></button>
+    </header>
+
+    <div class="lobby-body">
+      <div class="lobby-main">
+        <div class="section-index">
+          <span>ROSTER / قائمة اللاعبين</span>
+          <span id="lobby-count">0 / 15</span>
+        </div>
+        <div class="roster-grid" id="lobby-roster"></div>
+
+        <div class="lobby-note" id="lobby-note"></div>
+      </div>
+
+      <aside class="lobby-side">
+        <div class="side-panel">
+          <div class="section-index"><span>SETTINGS</span><span>الإعدادات</span></div>
+          <div class="settings-list" id="settings-list"></div>
+          <button class="primary-button full" type="button" id="start-btn" hidden><span>ابدأ اللعبة</span><span class="button-mark" aria-hidden="true">+</span></button>
+          <button class="ghost-button full" type="button" id="solo-test-btn" hidden><span>تجربة فردية (لاعب واحد)</span><span class="button-mark" aria-hidden="true">▶</span></button>
+          <p class="side-hint" id="settings-hint">المضيف فقط يستطيع تعديل الإعدادات وبدء اللعبة.</p>
+        </div>
+        <div class="side-panel">
+          <div class="section-index"><span>DECK</span><span>توزيع محتمل</span></div>
+          <div class="deck-preview" id="deck-preview"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ GAME ═══════════ -->
+<section class="screen game-screen" id="game" hidden aria-label="اللعبة">
+  <div class="screen-ambient" aria-hidden="true"></div>
+
+  <header class="game-top">
+    <div class="game-meta">
+      <span class="game-room">ROOM <b id="game-code">—————</b></span>
+      <span class="game-phase" id="game-phase"><i aria-hidden="true"></i><span>—</span></span>
+      <span class="game-day" id="game-day">DAY 0</span>
+    </div>
+    <div class="game-timer" id="game-timer">
+      <div class="game-timer-bar"><span id="game-timer-fill"></span></div>
+      <span class="game-timer-num" id="game-timer-num">--</span>
+    </div>
+    <div class="game-actions">
+      <button class="mini-btn" type="button" id="advance-btn" hidden>تخطّي المرحلة</button>
+      <button class="mini-btn" type="button" id="game-leave">مغادرة</button>
+    </div>
+  </header>
+
+  <div class="game-body">
+    <div class="game-stage">
+      <div class="phase-banner" id="phase-banner">
+        <span class="phase-banner-kicker" id="phase-kicker">PHASE</span>
+        <h2 class="phase-banner-title" id="phase-title">—</h2>
+        <p class="phase-banner-sub" id="phase-sub">—</p>
+      </div>
+
+      <div class="death-banner" id="death-banner" hidden>
+        <img class="death-img" id="death-img" alt="" hidden>
+        <span class="death-text" id="death-text"></span>
+      </div>
+
+      <div class="players-grid" id="players-grid" aria-label="اللاعبون"></div>
+
+      <div class="action-dock" id="action-dock">
+        <div class="action-dock-info">
+          <span class="action-dock-role" id="dock-role">—</span>
+          <span class="action-dock-hint" id="dock-hint">—</span>
+        </div>
+        <div class="action-dock-controls">
+          <span class="action-target" id="action-target">لم تختر هدفًا</span>
+          <button class="primary-button" type="button" id="action-confirm" disabled><span id="action-confirm-label">تأكيد</span><span class="button-mark" aria-hidden="true">+</span></button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="chat-panel" aria-label="المحادثة">
+      <div class="chat-head">
+        <div class="chat-tabs" id="chat-tabs" role="tablist"></div>
+        <span class="chat-state" id="chat-state"></span>
+      </div>
+      <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
+      <form class="chat-form" id="chat-form">
+        <input class="chat-input" id="chat-input" type="text" maxlength="240" autocomplete="off" placeholder="اكتب رسالة…" aria-label="رسالة">
+        <button class="chat-send" type="submit" aria-label="إرسال">↗</button>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<!-- ═══════════ GAME OVER ═══════════ -->
+<section class="screen over-screen" id="over" hidden aria-label="نهاية اللعبة">
+  <div class="screen-ambient" aria-hidden="true"></div>
+  <div class="over-shell">
+    <span class="over-eyebrow" id="over-eyebrow">FINAL VERDICT</span>
+    <h2 class="over-title" id="over-title">—</h2>
+    <p class="over-sub" id="over-sub">—</p>
+    <div class="reveal-grid" id="reveal-grid"></div>
+    <div class="over-actions">
+      <button class="primary-button" type="button" id="rematch-btn"><span>لعبة جديدة</span><span class="button-mark" aria-hidden="true">+</span></button>
+      <button class="ghost-button" type="button" id="over-leave"><span>مغادرة الغرفة</span><span class="button-mark" aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CURTAIN ═══════════ -->
+<div class="curtain" id="curtain" hidden aria-hidden="true">
+  <div class="curtain-inner">
+    <span class="curtain-kicker" id="curtain-kicker">PHASE</span>
+    <p class="curtain-title" id="curtain-title">—</p>
+    <p class="curtain-sub" id="curtain-sub">—</p>
+  </div>
+</div>
+
+<!-- ═══════════ ROLE REVEAL ═══════════ -->
+<div class="role-reveal" id="role-reveal" hidden>
+  <div class="role-reveal-card" id="role-reveal-card">
+    <span class="role-reveal-kicker">YOUR ROLE</span>
+    <span class="role-reveal-suit" id="role-reveal-suit" aria-hidden="true">♠</span>
+    <h2 class="role-reveal-name" id="role-reveal-name">—</h2>
+    <span class="role-reveal-en" id="role-reveal-en">—</span>
+    <p class="role-reveal-blurb" id="role-reveal-blurb">—</p>
+    <p class="role-reveal-goal" id="role-reveal-goal">—</p>
+    <button class="primary-button" type="button" id="role-reveal-close"><span>فهمت. لليلة.</span><span class="button-mark" aria-hidden="true">+</span></button>
+  </div>
+</div>
+
+<!-- ═══════════ GATE DIALOG ═══════════ -->
+<dialog class="gate" id="gate" aria-labelledby="gate-title">
+  <form method="dialog" class="gate-form" id="gate-form">
+    <button class="gate-close" type="button" id="gate-close" aria-label="إغلاق">×</button>
+    <span class="gate-edition" dir="ltr">TOMAN MAFIA / ENTRY</span>
+    <h2 class="gate-title" id="gate-title">—</h2>
+    <p class="gate-sub" id="gate-sub">—</p>
+
+    <label class="field">
+      <span class="field-label">اسمك في اللعبة</span>
+      <input class="field-input" id="gate-name" type="text" maxlength="18" autocomplete="nickname" placeholder="مثال: نايف" required>
+    </label>
+
+    <div class="field">
+      <span class="field-label">جنسك</span>
+      <div class="gender-pick" role="radiogroup" aria-label="اختيار الجنس">
+        <label class="gender-opt">
+          <input type="radio" name="gender" value="male" checked>
+          <span class="gender-face" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="28" height="28"><circle cx="20" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 36c0-8 5-12 12-12s12 4 12 12" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <span class="gender-txt">ولد</span>
+        </label>
+        <label class="gender-opt">
+          <input type="radio" name="gender" value="female">
+          <span class="gender-face" aria-hidden="true">
+            <svg viewBox="0 0 40 40" width="28" height="28"><circle cx="20" cy="14" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 36c0-8 5-12 12-12s12 4 12 12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 10c0-6 16-6 16 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </span>
+          <span class="gender-txt">بنت</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="field-label">صورتك الشخصية <small>(اختياري)</small></span>
+      <div class="avatar-pick" id="avatar-pick" role="button" tabindex="0" aria-label="اختر صورتك">
+        <img class="avatar-preview" id="avatar-preview" alt="" hidden>
+        <span class="avatar-empty" id="avatar-empty">
+          <svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="24" cy="18" r="8"/>
+            <path d="M8 42c0-9 7-14 16-14s16 5 16 14"/>
+            <path class="avatar-plus" d="M36 8v8M32 12h8" stroke-width="2.5"/>
+          </svg>
+          <span class="avatar-hint">اضغط لاختيار صورة</span>
+        </span>
+        <button class="avatar-clear" id="avatar-clear" type="button" aria-label="حذف الصورة" hidden>×</button>
+      </div>
+      <input type="file" id="avatar-file" accept="image/*" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;">
+    </div>
+
+    <label class="field" id="gate-code-field" hidden>
+      <span class="field-label">رمز الغرفة</span>
+      <input class="field-input code" id="gate-code" type="text" maxlength="5" autocomplete="off" placeholder="ABCDE" dir="ltr" autocapitalize="characters">
+    </label>
+
+    <p class="gate-error" id="gate-error" role="alert" hidden></p>
+
+    <button class="primary-button full" type="submit" id="gate-submit"><span id="gate-submit-label">تأكيد</span><span class="button-mark" aria-hidden="true">+</span></button>
+    <p class="gate-hint" id="gate-hint"></p>
+  </form>
+</dialog>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <a class="footer-brand" href="#home" aria-label="TOMAN MAFIA">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 120 120" width="40" height="40">
+          <path d="M60 8 L106 30 V70 L60 112 L14 70 V30 Z" fill="#16160f" stroke="#A51538" stroke-width="4"></path>
+          <text x="60" y="74" text-anchor="middle" font-family="Chakra Petch, Arial Black, Arial" font-size="42" font-weight="700" font-style="italic" fill="#eeeae2">TM</text>
+        </svg>
+      </span>
+      <span class="footer-brand-type">
+        <span class="footer-brand-name">TOMAN MAFIA</span>
+        <small>STUDIO</small>
+      </span>
+    </a>
+    <div class="footer-actions">
+      <span class="footer-note">مصمَّم للعب مع اصدقائك — بلا حسابات، بلا تعقيد.</span>
+    </div>
+  </div>
+
+  <div class="footer-wordmark" aria-hidden="true">
+    <span>TOMAN</span><span class="outline">MAFIA</span>
+  </div>
+
+  <div class="footer-company" role="group" aria-label="معلومات">
+    <div class="footer-company-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg>
+      <div><span class="footer-company-label">Players</span><span class="footer-company-value">5 — 15</span></div>
+    </div>
+    <div class="footer-company-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 10h16"/></svg>
+      <div><span class="footer-company-label">Modes</span><span class="footer-company-value">Rooms by code</span></div>
+    </div>
+    <div class="footer-company-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3v18M3 12h18"/></svg>
+      <div><span class="footer-company-label">Roles</span><span class="footer-company-value">Mafia · Doctor · Detective · Citizen</span></div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© <span id="year">2026</span> TOMAN MAFIA</span>
+    <a href="#home" class="footer-back-top" aria-label="العودة للأعلى"><span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/net.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/game.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
