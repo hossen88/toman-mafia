@@ -389,7 +389,8 @@
     const room = App.room;
     if (!room) return;
     $('room-code').textContent = room.code;
-    $('lobby-count').textContent = `${room.players.length} / 15`;
+    const maxP = (room.limits && room.limits.maxPlayers) || 30;
+    $('lobby-count').textContent = `${room.players.length} / ${maxP}`;
 
     const roster = $('lobby-roster');
     roster.textContent = '';
@@ -493,6 +494,10 @@
   }
 
   function mafiaCountFor(n) {
+    if (n >= 28) return 7;
+    if (n >= 24) return 6;
+    if (n >= 20) return 5;
+    if (n >= 16) return 4;
     if (n >= 12) return 3;
     if (n >= 8) return 2;
     return 1;

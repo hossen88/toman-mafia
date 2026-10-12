@@ -54,7 +54,7 @@ const DEFAULT_SETTINGS = {
 
 const LIMITS = {
   minPlayers: 5,
-  maxPlayers: 15,
+  maxPlayers: 30,
   nightSec: [15, 300],
   daySec: [15, 600],
   voteSec: [10, 300],
@@ -62,6 +62,10 @@ const LIMITS = {
 };
 
 function mafiaCountFor(n) {
+  if (n >= 28) return 7;
+  if (n >= 24) return 6;
+  if (n >= 20) return 5;
+  if (n >= 16) return 4;
   if (n >= 12) return 3;
   if (n >= 8) return 2;
   return 1;
